@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<h2 class="display-2">Books signed out by user<h2> <br>
+<h5>Current User: <%= current_user.email %></h5>
+<br><br><br><br>
+<h3>Current books signed out:</h3>
+
+<% @user.check_outs.each do |book| %>
+  
+ BookTitle:  <%= book.bookTitle %> &nbsp; &nbsp; &nbsp; &nbsp;
+ Return by: <%= (book.checkout_date + 7)%>
+  <%= link_to"return book",return_book_path(book.book_id), class:"btn btn-secondary"%>
+ <% end %>
+

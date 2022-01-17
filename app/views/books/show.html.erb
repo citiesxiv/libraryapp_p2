@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+<div class="jumbotron">
+  <h1 class="display-4"><%= @book.title %></h1>
+  <p class="lead">
+   Author: <%= @book.author %> <br><br>
+   Genre: <%= @book.genre %><br><br>
+   Subgenre: <%= @book.subgenre %><br><br>
+   Pages: <%= @book.pages %><br><br>
+   Publisher: <%= @book.publisher %><br><br>
+   Copies: <%= @book.copies %><br><br>
+   <% if user_signed_in? && current_user.admin %>
+      Users who currently have this book signed out:<br>
+       <% @book.users.each do |user| %>
+          <%= user.email%><br>
+
+        <% end %>
+   <% end %>
+  </p>
+  <hr class="my-4">
+  <%if current_user  && @book.copies > 0%>
+    <%= link_to "Reserve Book",@book_reserve,method: :post, class: "btn btn-secondary"%>
+  <% end %>
+  <%if current_user && current_user.admin%>
+    <%= link_to 'Edit', edit_book_path(@book), class: 'btn btn-secondary'%> 
+    <% end %>
+ <%= link_to 'Back', books_path,
+  class: 'btn btn-dark'%>
+</div>
+

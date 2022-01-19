@@ -66,9 +66,17 @@ class BooksController < ApplicationController
 
   def reserve
     @bookCopy= Book.find(params[:id])
+    @bookCopy.histories.create(email: current_user.email, chkDate: Date.today, copy: @bookCopy.copies)
+    
+    current_user.check_outs.create(book_id: @bookCopy.id,
+                                   checkout_date: Date.today,
+                                   bookTitle: @bookCopy.title,
+                                   returnDate: (Date.today + 7),
+                                   email: current_user.email, 
+                                   copy: @bookCopy.copies)
     @bookCopy.copies -= 1 
     @bookCopy.save
-    current_user.check_outs.create(book_id: @bookCopy.id,checkout_date: Date.today,bookTitle: @bookCopy.title)
+   
     
    
     redirect_to @bookCopy, notice: @bookCopy.title + ' was successfully checked out.' 
@@ -77,10 +85,15 @@ class BooksController < ApplicationController
   end
 
   def return
-    @bookCopy= Book.find(params[:id])
+    @bookCopy = Book.find(params[:id])
     @bookCopy.copies += 1 
     @bookCopy.save
     current_user.books.destroy(Book.find_by_id(@bookCopy))
+
+    @history = @bookCopy.histories(History.find_by_email(current_user.email)).last
+
+    @history.returnedOn = Date.today
+    @history.save
     redirect_to current_user, notice:'Your Book was successfully returned.' 
   end
  

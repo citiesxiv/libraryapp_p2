@@ -9,15 +9,31 @@
    Publisher: <%= @book.publisher %><br><br>
    Copies: <%= @book.copies %><br><br>
    <% if user_signed_in? && current_user.admin %>
-      Users who currently have this book signed out:<br>
-       <% @book.users.each do |user| %>
-          <%= user.email%><br>
+  
+        Current Users with this book<br>
+     
+    
+         <% @book.check_outs.each do |user| %>
+           <%= user.email%> &nbsp;&nbsp; copy: <%= user.copy%><br>
 
         <% end %>
+    
+        Book History<br>
+    
+        <% @book.histories.each do |history| %>
+        <%= history.email%> &nbsp;&nbsp; copy: <%= history.copy%> &nbsp;&nbsp; Checkout Date: <%= history.created_at.to_date%>
+        &nbsp;&nbsp; Return Date: <%= history.returnedOn%><br>
+      <%end%> 
+  
+      
+    
+
+      
+    
    <% end %>
   </p>
   <hr class="my-4">
-  <%if current_user  && @book.copies > 0%>
+  <%if current_user && @book.copies > 0%>
     <%= link_to "Reserve Book",@book_reserve,method: :post, class: "btn btn-secondary"%>
   <% end %>
   <%if current_user && current_user.admin%>

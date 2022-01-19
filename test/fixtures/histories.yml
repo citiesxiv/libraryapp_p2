@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  bookid: 1
+  email: MyString
+  chkDate: 2022-01-18
+  returnedOn: 2022-01-18
+
+two:
+  bookid: 1
+  email: MyString
+  chkDate: 2022-01-18
+  returnedOn: 2022-01-18

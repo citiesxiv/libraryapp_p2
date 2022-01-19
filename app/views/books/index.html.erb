@@ -9,7 +9,7 @@
       <th>Author</th>
       <th>Genre</th>
       <th>Subgenre</th>
-      <th>Pages</th>
+      
       <th>Publisher</th>
       <th>Copies</th>
       <th colspan="3"></th>
@@ -17,13 +17,13 @@
   </thead>
 
   <tbody>
-    <% @books.each do |book| %>
+    <% @books.order([:id]).each do |book| %>
       <tr>
         <td><%= book.title %></td>
         <td><%= book.author %></td>
         <td><%= book.genre %></td>
         <td><%= book.subgenre %></td>
-        <td><%= book.pages %></td>
+        
         <td><%= book.publisher %></td>
         <td><%= book.copies %></td>
         <td><%= link_to 'Details', book,class:"btn btn-secondary" %></td>

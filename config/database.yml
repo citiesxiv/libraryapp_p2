@@ -82,5 +82,6 @@ test:
 production:
   <<: *default
   database: library_anthony_production
-  username: library_anthony
-  password: <%= ENV['LIBRARY_ANTHONY_DATABASE_PASSWORD'] %>
+  pool: 5
+  username: anthony
+  password: a123

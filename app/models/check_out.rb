@@ -1,4 +1,4 @@
-class CheckOut < ActiveRecord::Base
+class CheckOut < ApplicationRecord
     belongs_to :book 
     belongs_to :user
 end

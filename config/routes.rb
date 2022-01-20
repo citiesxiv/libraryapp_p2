@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {sessions: 'users/sessions'}
   root 'books#index'
   resources :books
-  get '/books/:id/return', to: 'books#return', as: "return_book"
+  get '/books/:id/return', to: 'books#book_return', as: "return_book"
   post 'books/:id/', to: 'books#reserve'
   resources :users
   # The priority is based upon order of creation: first created -> highest priority.

@@ -84,17 +84,17 @@ class BooksController < ApplicationController
     
   end
 
-  def return
+  def book_return
     @bookCopy = Book.find(params[:id])
     @bookCopy.copies += 1 
     @bookCopy.save
     current_user.books.destroy(Book.find_by_id(@bookCopy))
 
-    @history = @bookCopy.histories(History.find_by_email(current_user.email)).last
+    @history = @bookCopy.histories.where(email: current_user.email).last 
 
     @history.returnedOn = Date.today
     @history.save
-    redirect_to current_user, notice:'Your Book was successfully returned.' 
+    redirect_to current_user, notice: 'Book was successfully returned.'
   end
  
   private

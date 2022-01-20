@@ -21,6 +21,7 @@ module LibraryAnthony
     # config.i18n.default_locale = :de
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
-    config.active_record.raise_in_transactional_callbacks = true
+    config.public_file_server.enabled
+    config.public_file_server.headers = { 'Cache-Control' => 'public, max-age=3600'}
   end
 end

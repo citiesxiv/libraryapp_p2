@@ -1,3 +1,3 @@
-class History < ActiveRecord::Base
+class History < ApplicationRecord
     belongs_to :book
 end

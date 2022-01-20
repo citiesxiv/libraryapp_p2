@@ -81,7 +81,4 @@ test:
 #
 production:
   <<: *default
-  database: library_anthony_production
-  pool: 5
-  username: anthony
-  password: a123
+  url: <%= ENV['DATABASE_URL'] %>

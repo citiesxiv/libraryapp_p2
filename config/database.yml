@@ -20,7 +20,7 @@ default: &default
   # For details on connection pooling, see rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: 5
-  usernme: anthony
+  username: anthony
   password: a123
 development:
   <<: *default
@@ -81,4 +81,4 @@ test:
 #
 production:
   <<: *default
-  url: <%= ENV['DATABASE_URL'] %>
+  url: postgres://ctkcdctmuoagkj:476bb480b9ee897ead4decf1494e95c87de39b6bb70644d02cf24ee859d540e7@ec2-3-212-143-188.compute-1.amazonaws.com:5432/d943p62h6tfv18

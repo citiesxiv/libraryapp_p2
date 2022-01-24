@@ -1,12 +1,12 @@
 class AppmailerMailer < ApplicationMailer
-    default from: 'citiesxiv@onmail.com'
+    
 
     def late_notice 
         @books = Book.all
         late_users = Array.new
 
         @books.histories.each do |history|
-            if(history.returnedOn == nil)
+            if(history.returnedOn = nil)
                 late_users << history.email
             end
 

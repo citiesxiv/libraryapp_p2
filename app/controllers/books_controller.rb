@@ -1,5 +1,6 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy, :return]
+  
 
   # GET /books
   # GET /books.json
@@ -96,7 +97,7 @@ class BooksController < ApplicationController
     @history.save
     redirect_to current_user, notice: 'Book was successfully returned.'
   end
- 
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_book

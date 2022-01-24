@@ -5,10 +5,13 @@ class AppmailerMailer < ApplicationMailer
         @books = Book.all
         late_users = Array.new
 
-        @books.histories.each do |history|
-            if(history.returnedOn = nil)
-                late_users << history.email
+        @books.each do |book|
+            book.histories.each do |history|
+                if(Date.today == history.chkDate + 7 && history.returnedOn == nil)
+                    late_users << history.email
+                end
             end
+            
 
         end
 

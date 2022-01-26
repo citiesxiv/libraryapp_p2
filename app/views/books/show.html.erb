@@ -38,8 +38,16 @@
   <%if current_user && @book.copies == 0%>
    <%= link_to "Request Book",request_book_path, class: "btn btn-secondary"%>
   <% end %>
-  <%if current_user && @book.copies > 0 && !current_user.books.include?(@book.title)%>
-    <%= link_to "Reserve Book",@book_reserve,method: :post, class: "btn btn-secondary"%>
+  <%if current_user && @book.copies > 0%>
+    <%if current_user.check_outs.length == 0%>
+      <%= link_to "Reserve Book",@book_reserve,method: :post, class: "btn btn-secondary"%>
+    <%else%>
+      <%current_user.check_outs.each do |user_book|%>
+        <% if user_book.bookTitle != @book.title %>
+         <%= link_to "Reserve Book",@book_reserve,method: :post, class: "btn btn-secondary"%>
+       <% end %>
+     <% end %>
+   <% end %>  
   <% end %>
   <%if current_user && current_user.admin%>
     <%= link_to 'Edit', edit_book_path(@book), class: 'btn btn-secondary'%> 

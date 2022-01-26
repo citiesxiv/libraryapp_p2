@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root 'books#index'
   resources :books
   get '/books/:id/return', to: 'books#book_return', as: "return_book"
+  get '/books/:id/request_book', to: 'books#request_book', as:"request_book"
   post 'books/:id/', to: 'books#reserve'
   resources :users
   # The priority is based upon order of creation: first created -> highest priority.

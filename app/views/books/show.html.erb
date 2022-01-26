@@ -2,12 +2,14 @@
 <div class="jumbotron">
   <h1 class="display-4"><%= @book.title %></h1>
   <p class="lead">
+   <br>
    Author: <%= @book.author %> <br><br>
    Genre: <%= @book.genre %><br><br>
    Subgenre: <%= @book.subgenre %><br><br>
    Pages: <%= @book.pages %><br><br>
    Publisher: <%= @book.publisher %><br><br>
    Copies: <%= @book.copies %><br><br>
+   Available At: <%= @book.libName %><br><br>
    <% if user_signed_in? && current_user.admin %>
   
         Current Users with this book<br>
@@ -33,7 +35,10 @@
    <% end %>
   </p>
   <hr class="my-4">
-  <%if current_user && @book.copies > 0%>
+  <%if current_user && @book.copies == 0%>
+   <%= link_to "Request Book",request_book_path, class: "btn btn-secondary"%>
+  <% end %>
+  <%if current_user && @book.copies > 0 && !current_user.books.include?(@book.title)%>
     <%= link_to "Reserve Book",@book_reserve,method: :post, class: "btn btn-secondary"%>
   <% end %>
   <%if current_user && current_user.admin%>

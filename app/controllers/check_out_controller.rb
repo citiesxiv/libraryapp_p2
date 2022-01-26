@@ -9,7 +9,7 @@ class CheckOutController < ApplicationController
 
   private
     def checkout_params
-      params.require(:checkout).permit(:book_id, :user_id, :checkout_date,:bookTitle,:returnDate,:email,:copy)
+      params.require(:checkout).permit(:book_id, :user_id, :checkout_date,:bookTitle,:returnDate,:email,:copy,:libName)
     end
   
 

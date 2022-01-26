@@ -18,10 +18,15 @@ class AppmailerMailer < ApplicationMailer
         late_users.uniq.each do |email|
             mail(to: email, subject: 'You have 1 or more books overdue.')
         end
-
-        
-
-
-        
     end
+    
+    def send_notice(book)
+        @book = book
+        @book.requests.each do |user|
+            mail(to: user.email, subject: @book.title + ' has become available.')
+        end
+
+    end
+
+    
 end

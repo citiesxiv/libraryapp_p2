@@ -7,6 +7,7 @@
 <ul>
 <% @user.check_outs.each do |book| %>
   <li>
+  Return To: <%= book.libName %> &nbsp;&nbsp;
  BookTitle:  <%= book.bookTitle %> &nbsp; &nbsp; &nbsp; &nbsp;
  Return by: <%= book.returnDate %>
   <%= link_to"return book",return_book_path(book.book_id), class:"btn btn-secondary"%><br><br>

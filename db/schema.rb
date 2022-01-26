@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_18_204629) do
+ActiveRecord::Schema.define(version: 2022_01_26_190114) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 2022_01_18_204629) do
     t.integer "copies"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "libName"
   end
 
   create_table "check_outs", id: :serial, force: :cascade do |t|
@@ -37,6 +38,7 @@ ActiveRecord::Schema.define(version: 2022_01_18_204629) do
     t.date "returnDate"
     t.string "email"
     t.integer "copy"
+    t.string "libName"
   end
 
   create_table "histories", id: :serial, force: :cascade do |t|
@@ -47,6 +49,22 @@ ActiveRecord::Schema.define(version: 2022_01_18_204629) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "copy"
+  end
+
+  create_table "libraries", force: :cascade do |t|
+    t.string "branchName"
+    t.string "address"
+    t.string "phoneNum"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "requests", force: :cascade do |t|
+    t.string "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "book_id"
+    t.string "libName"
   end
 
   create_table "users", id: :serial, force: :cascade do |t|

@@ -74,7 +74,8 @@ class BooksController < ApplicationController
                                    bookTitle: @bookCopy.title,
                                    returnDate: (Date.today + 7),
                                    email: current_user.email, 
-                                   copy: @bookCopy.copies)
+                                   copy: @bookCopy.copies,
+                                   libName: @bookCopy.libName)
     @bookCopy.copies -= 1 
     @bookCopy.save
    
@@ -89,6 +90,13 @@ class BooksController < ApplicationController
     @bookCopy = Book.find(params[:id])
     @bookCopy.copies += 1 
     @bookCopy.save
+    
+    if(@bookCopy.requests.length > 0)
+      AppmailerMailer.send_notice(@bookCopy).deliver
+      @bookCopy.requests.destroy_all
+    end
+    
+
     current_user.books.destroy(Book.find_by_id(@bookCopy))
 
     @history = @bookCopy.histories.where(email: current_user.email).last 
@@ -96,6 +104,11 @@ class BooksController < ApplicationController
     @history.returnedOn = Date.today
     @history.save
     redirect_to current_user, notice: 'Book was successfully returned.'
+  end
+  def request_book 
+    @bookCopy = Book.find(params[:id])
+    @bookCopy.requests.create(email: current_user.email,libName: @bookCopy.libName)
+    redirect_to @bookCopy, notice: @bookCopy.title + ' was successfully requested.'
   end
   
   private
@@ -106,6 +119,6 @@ class BooksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def book_params
-      params.require(:book).permit(:title, :author, :genre, :subgenre, :pages, :publisher, :copies)
+      params.require(:book).permit(:libName,:title, :author, :genre, :subgenre, :pages, :publisher, :copies)
     end
 end

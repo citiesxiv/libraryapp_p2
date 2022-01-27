@@ -91,7 +91,7 @@ class BooksController < ApplicationController
     @bookCopy.copies += 1 
     @bookCopy.save
     
-   if(@bookCopy.bookrequests != nil && @bookCopy.bookrequests.length > 0)
+   if(@bookCopy.bookrequests.length > 0)
      AppmailerMailer.send_notice(@bookCopy).deliver
      @bookCopy.bookrequests.destroy_all
    end

@@ -1,3 +1,3 @@
-class Request < ApplicationController
+class Request < AApplicationRecord
     belongs_to :book
 end

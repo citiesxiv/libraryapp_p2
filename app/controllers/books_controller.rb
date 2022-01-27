@@ -91,19 +91,19 @@ class BooksController < ApplicationController
     @bookCopy.copies += 1 
     @bookCopy.save
     
-    # if(@bookCopy.bookrequests.length > 0)
-    #   AppmailerMailer.send_notice(@bookCopy).deliver
-    #   @bookCopy.bookrequests.destroy_all
-    # end
+   if(@bookCopy.bookrequests != nil && @bookCopy.bookrequests.length > 0)
+     AppmailerMailer.send_notice(@bookCopy).deliver
+     @bookCopy.bookrequests.destroy_all
+   end
     
 
-    current_user.books.destroy(Book.find_by_id(@bookCopy))
+   current_user.books.destroy(Book.find_by_id(@bookCopy))
 
-    @history = @bookCopy.histories.where(email: current_user.email).last 
+   @history = @bookCopy.histories.where(email: current_user.email).last 
 
-    @history.returnedOn = Date.today
-    @history.save
-    redirect_to current_user, notice: 'Book was successfully returned.'
+   @history.returnedOn = Date.today
+   @history.save
+   redirect_to current_user, notice: 'Book was successfully returned.'
   end
   
   def request_book 

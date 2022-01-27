@@ -92,7 +92,7 @@ class BooksController < ApplicationController
     @bookCopy.save
     
    if(@bookCopy.bookrequests.length > 0)
-      AppmailerMailer.send_notice(@bookCopy).deliver_now
+      AppmailerMailer.send_notice.deliver_now
       @bookCopy.bookrequests.destroy_all
    end
     

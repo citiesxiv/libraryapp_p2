@@ -21,8 +21,8 @@ class AppmailerMailer < ApplicationMailer
         end
     end
     
-    def send_notice(book)
-        @book = book
+    def send_notice
+        @book = Book.find(params[:id])
         @book.bookrequests.each do |user|
             mail(to: user.email, subject: @book.title + ' has become available.')
         end

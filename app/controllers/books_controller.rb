@@ -91,10 +91,10 @@ class BooksController < ApplicationController
     @bookCopy.copies += 1 
     @bookCopy.save
     
-   #  if(@bookCopy.bookrequests.length > 0)
-      AppmailerMailer.send_notice(@bookCopy).deliver
+   if(@bookCopy.bookrequests.length > 0)
+      AppmailerMailer.send_notice(@bookCopy).deliver_now
       @bookCopy.bookrequests.destroy_all
-    #  end
+   end
     
 
    current_user.books.destroy(Book.find_by_id(@bookCopy))

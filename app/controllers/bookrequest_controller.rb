@@ -1,4 +1,4 @@
-class Bookrequest < ApplicationController
+class BookrequestController < ApplicationController
     def create
       @request = Bookrequest.new(request_params)
     end

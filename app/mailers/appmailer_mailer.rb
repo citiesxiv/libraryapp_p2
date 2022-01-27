@@ -22,7 +22,7 @@ class AppmailerMailer < ApplicationMailer
     
     def send_notice(book)
         @book = book
-        @book.requests.each do |user|
+        @book.bookrequests.each do |user|
             mail(to: user.email, subject: @book.title + ' has become available.')
         end
 

@@ -91,9 +91,9 @@ class BooksController < ApplicationController
     @bookCopy.copies += 1 
     @bookCopy.save
     
-    if(@bookCopy.requests.length > 0)
+    if(@bookCopy.bookrequests.length > 0)
       AppmailerMailer.send_notice(@bookCopy).deliver
-      @bookCopy.requests.destroy_all
+      @bookCopy.bookrequests.destroy_all
     end
     
 
@@ -107,7 +107,7 @@ class BooksController < ApplicationController
   end
   def request_book 
     @bookCopy = Book.find(params[:id])
-    @bookCopy.requests.create(email: current_user.email,libName: @bookCopy.libName)
+    @bookCopy.bookrequests.create(email: current_user.email,libName: @bookCopy.libName)
     redirect_to @bookCopy, notice: @bookCopy.title + ' was successfully requested.'
   end
   

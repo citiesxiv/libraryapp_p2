@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_26_190114) do
+ActiveRecord::Schema.define(version: 2022_01_27_152030) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bookrequests", id: :bigint, default: -> { "nextval('requests_id_seq'::regclass)" }, force: :cascade do |t|
+    t.string "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "book_id"
+    t.string "libName"
+  end
 
   create_table "books", id: :serial, force: :cascade do |t|
     t.string "title"
@@ -57,14 +65,6 @@ ActiveRecord::Schema.define(version: 2022_01_26_190114) do
     t.string "phoneNum"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "requests", force: :cascade do |t|
-    t.string "email"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "book_id"
-    t.string "libName"
   end
 
   create_table "users", id: :serial, force: :cascade do |t|
